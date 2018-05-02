@@ -4,13 +4,13 @@ var orm = require("../config/orm.js");
 //how to do this???
 //this is passed to burgers_controller
 var burger = {
-    all: function(cd){
+    selectAll: function(cb){
         orm.selectAll("burgers", function(res){
-            cd(res);
+            cb(res);
         });
-    },
-    insert: orm.insertOne("name, false"),
-    update: orm.updateOne("id")
+    }
+    // insert: orm.insertOne("name, false"),
+    // update: orm.updateOne("id")
 };
 
 module.exports=burger;

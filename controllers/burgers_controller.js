@@ -3,17 +3,21 @@ var burger = require("../models/burger.js");
 var router = express.Router();
 
 router.get("/", function(req, res){
-    burger.all(function(data){
-        console.log("working"); 
+    burger.selectAll(function(data){
+        var hbsObj = {
+            burgers: data
+        };
+        // console.log("burger data: "+ hbsObj); 
+        res.render("index", hbsObj);
+
     })
-    res.render("index", data);
 });
 
-router.post("/api/bugers", function(req, res){
-    burger.insert(function(data){
-        console.log("working");
-    });
-    // res.json({})
-});
+// router.post("/api/bugers", function(req, res){
+//     burger.insert(function(data){
+//         console.log("working");
+//     });
+//     // res.json({})
+// });
 
 module.exports = router;

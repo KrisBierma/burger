@@ -3,10 +3,22 @@
 <ul>
     {{#each burgers}}
     <li>
-        <p>
+        {{#unless devoured}}
+            {{this.burger_name}}
+        <button data-burgerid="{{this.id}}" class="devourIt">Devour it!</button>
+        {{/unless}}
+    </li>
+    {{/each}}
+</ul>
+
+<ul>
+    {{#each burgers}}
+    <li>
+        {{#if devoured}}
+        <p></p>
         {{this.burger_name}}
         <button data-burgerid="{{this.id}}" class="devourIt">Devour it!</button>
-        </p>
+        {{/if}}
     </li>
     {{/each}}
 </ul>
@@ -20,12 +32,12 @@
 <script type="text/javascript">
     $(".devourIt").on("click", function(e){
         var id = $(this).data("burgerid");
-
+        console.log("working");
         $.ajax("/burgersList/"+id, {
             type:"DELETE"
     }).then(
         function(){
-            console.log("Deleted/devoured burder id ", id);
+            console.log("Deleted/devoured burger id ", id);
             location.reload();
         }
     )

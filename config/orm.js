@@ -10,7 +10,6 @@ function printQuestionMarks(num) {
 
   function objToSql(ob) {
     var arr = [];
-  
     for (var key in ob) {
       var value = ob[key];
       if (Object.hasOwnProperty.call(ob, key)) {
@@ -20,34 +19,47 @@ function printQuestionMarks(num) {
         arr.push(key + "=" + value);
       }
     }
-  
     return arr.toString();
-  }
-
+  };
 
 var orm={
     selectAll: function(tableInput, cb){
+        console.log("here");
         var queryString = "Select * From "+tableInput + ";";
         connection.query(queryString, function(err, res){
             if (err) throw err;
-            // console.log(res);
-                       
-            }
-
-    );
+            console.log(res);
+            cb(res);
+        });
     },
-    insertOne: function(burgerToInsert, devoured){
-        var queryString = "Insert Into burgers (burger_name, devoured) Values (?, ?)";
-        connection.query(queryString, [burgerToInsert, devoured], function(err, res){
+    create: function(columns, values, cb){
+        var queryString = "Insert Into burgers (";
+        queryString+=columns.toString();
+        // console.log(queryString);
+
+        queryString+=") Values (";
+        queryString+= printQuestionMarks(values.length);
+        // console.log(queryString);
+
+        queryString+=") ";
+        console.log(queryString);
+        connection.query(queryString, values, function(err, res){
             if (err) throw err;
             console.log(res);
+            cb(res);
         }) ;
     },
-    updateOne: function(id){
-        var queryString = "Update burgers Set devoured = true Where id = ?";
-        connection.query(queryString, id, function(err, res){
+    update: function(value, condition, cb){
+        console.log(value, condition);
+        var queryString = "Update burgers Set ";
+        queryString += objToSql(value);
+        queryString+= " Where ";
+        queryString+= condition +";";
+        console.log(queryString);
+        connection.query(queryString, function(err, res){
             if (err) throw err;
             console.log(res);
+            cb(res);
         });
     }
 };

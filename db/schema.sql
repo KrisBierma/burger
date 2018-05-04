@@ -1,4 +1,6 @@
 ### Schema
+Drop database if exists burgerDB;
+
 Create database if not exists burgerDB;
 
 Use burgerDB;
@@ -7,6 +9,6 @@ Create table if not exists burgers
 (
 id integer not null auto_increment,
 burger_name varchar (30) not null,
-devoured boolean,
+devoured Boolean default false,
 primary key (id)
 );

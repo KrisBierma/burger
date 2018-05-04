@@ -1,62 +1,26 @@
 <h1>Eat the Burger!</h1>
 
+<h2>Order's Up!</h2>
 <ul>
     {{#each burgers}}
-    <li>
         {{#unless devoured}}
-            {{this.burger_name}}
-        <button data-burgerid="{{this.id}}" class="devourIt">Devour it!</button>
+            {{> burger-block devour=true}}
         {{/unless}}
-    </li>
     {{/each}}
 </ul>
 
+<h2>Devoured Burgers. Yum!</h2>
 <ul>
     {{#each burgers}}
-    <li>
         {{#if devoured}}
-        <p></p>
-        {{this.burger_name}}
-        <button data-burgerid="{{this.id}}" class="devourIt">Devour it!</button>
+            {{> burger-block devour=false}}
         {{/if}}
-    </li>
     {{/each}}
 </ul>
 
 <form id="makeBurger">
-    <textarea type="text" name="burger"></textarea>
+    <h2>Enter a burger you'd like to eat.</h2>
+    <label for="bur">Burger Name:</label>
+    <textarea type="text" name="burger" id="bur"></textarea>
     <button type="submit">Submit</button>
-    <p>Enter a burger you'd like to eat.</p>
 </form>
-
-<script type="text/javascript">
-    $(".devourIt").on("click", function(e){
-        var id = $(this).data("burgerid");
-        console.log("working");
-        $.ajax("/burgersList/"+id, {
-            type:"DELETE"
-    }).then(
-        function(){
-            console.log("Deleted/devoured burger id ", id);
-            location.reload();
-        }
-    )
-
-
-    $("#makeBurger").on("submit", function(e){
-        e.preventDefault();
-        var newBurger = {
-            burger_name: $("#makeBurger [burger_name=burger]").val().trim();
-        };
-
-        $.ajax("/burgersList",{
-            type:"POST",
-            data: newBurger
-        }).then(
-            function(){
-                console.log("created new burger");
-                location.reload();
-            }
-        )
-    });
-</script>

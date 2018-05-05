@@ -14,7 +14,7 @@ Eat the Burger! uses persistent data (MySQL and unique ORM) and a template engin
 * [Node](http://jquery.com/) - Executes JavaScript server-side
 * [Express](https://expressjs.com/) - Web framework for Node.js
 * [NPM Packages](https://www.npmjs.com/) - Small packages of reuseable code that pack a big punch (express, body-parser, express-handlebars, mysql)
-* [MySQL] (https://www.mysql.com/) - Database
+* [MySQL](https://www.mysql.com/) - Database
 
 ## Author
 

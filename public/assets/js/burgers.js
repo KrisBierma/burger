@@ -10,9 +10,8 @@ $(function() {
         $.ajax("/api/burgers/"+id, {
             type:"PUT",
             data: newDevourState
-    }).then(
+        }).then(
         function(){
-            console.log("Devoured burger id ", id);
             location.reload();
         }
     )
@@ -31,10 +30,20 @@ $(function() {
             data: newBurger
         }).then(
             function(){
-                console.log("created new burger");
                 location.reload();
             }
         )
+    });
+
+    $(".delete-burger").on("click", function(e){
+        var id = $(this).data("burgerid");
+        $.ajax("/api/burgers/"+id, {
+            type:"Delete"
+        }).then(
+            function(){
+                location.reload();
+            }
+        );
     });
 
 })

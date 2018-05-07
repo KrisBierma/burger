@@ -1,7 +1,7 @@
 var mysql = require("mysql");
 require("dotenv").config();
 var keys = require("./keys.js");
-console.log(keys.keys);
+
 if (process.env.JAWSDB_URL){
     connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {

@@ -1,6 +1,9 @@
+//3 files: orm.js passes orm obj to burger.js, which passes burger obj to burger_controller.js, which has the routes
+
 var orm = require("../config/orm.js");
 
 //this is passed to burgers_controller
+//calls the orm obj from orm.js
 var burger = {
     selectAll: function(cb){
         orm.selectAll("burgers", function(res){

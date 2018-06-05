@@ -1,5 +1,8 @@
+//3 files: orm.js passes orm obj to burger.js, which passes burger obj to burger_controller.js, which has the routes
+
 var connection = require("../config/connection.js");
 
+//helps write the query by adding ? (turned to strings)
 function printQuestionMarks(num) {
     var arr = [];
     for (var i = 0; i < num; i++) {
@@ -8,6 +11,7 @@ function printQuestionMarks(num) {
     return arr.toString();
   };
 
+//converts obj key/value pairs to sql syntax to help with queries
 function objToSql(ob) {
 var arr = [];
 for (var key in ob) {
@@ -22,6 +26,7 @@ for (var key in ob) {
 return arr.toString();
 };
 
+//this is passed to the burger obj in burger.js
 var orm={
     selectAll: function(tableInput, cb){
         var queryString = "Select * From "+tableInput + ";";

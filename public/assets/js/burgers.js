@@ -1,5 +1,6 @@
 $(function() {
 
+    //updates the burger with ajax put
     $(".devourIt").on("click", function(e){
         var id = $(this).data("burgerid");
         var newDevour = $(this).data("newdevour");
@@ -18,6 +19,7 @@ $(function() {
     });
 
 
+    //creates the burger with ajax post
     $("#makeBurger").on("submit", function(e){
         e.preventDefault();
         var newBurger = {
@@ -35,6 +37,7 @@ $(function() {
         )
     });
 
+    //deletes the burger with ajax delete
     $(".delete-burger").on("click", function(e){
         var id = $(this).data("burgerid");
         $.ajax("/api/burgers/"+id, {
